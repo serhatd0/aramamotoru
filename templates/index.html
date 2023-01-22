@@ -1,0 +1,96 @@
+
+<html>
+    <head>
+        <title>AutoComplete</title>
+        
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+        <link href="css/style.css" rel="stylesheet" />
+        <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script> 
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+        <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/ui-lightness/jquery-ui.css"
+            rel="stylesheet" type="text/css" />
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js">  
+            </script>  
+            
+            <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js">  
+            </script>  
+            
+            <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/ui-lightness/jquery-ui.css"
+                rel="stylesheet" type="text/css" /> 
+    </head>
+    
+    <body class="bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand text-center" href="#">Düzce Üniversitesi Sıkca Sorulan Sorular</a>
+           
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+           
+          </nav>
+        <div class="wrapper">
+            <div class="container">   
+                <div class="row">
+                    <div class="col-md-12">
+                    <center >
+                        <div class="search-input">
+                            <form method="POST">
+                                <a href="" target="_blank" hidden></a>
+                                <input type="text" placeholder="Ara" id="tags" name="search" >
+                                <div class="autocom-box col-6" id="tags">
+                                    <!-- here list are inserted from javascript -->
+                                </div>
+                                <div class="icon"><a type="button"><i class="fas fa-search"></i></a></div>
+                            </form>
+                            <div class="col-md-6">
+                            
+                            </div>
+                            </div>
+                        </center>
+                    </div>
+                <div class="col-md-12" >
+                    {% if baslik != "" %}
+                        {% for baslik2 in baslik %}
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <div class="text-center">
+                                    <h2>{{baslik2[1]}}</h2>
+                                </div>
+                                <div >
+                                        {{baslik2[2]}}
+                                </div>
+                                <div >
+                                        <a>Score : {{baslik2[0]}}</a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {%endif%}
+                    </div>
+            </div>
+            
+            </div>
+        </div>
+        <script>
+            $( function() {
+            var availableTags = [
+              {% for language in languages %}
+                "{{language}}",
+              {% endfor %}
+            ];
+            $( "#tags" ).autocomplete({
+            source: availableTags
+            });
+          } );
+        </script>
+    </body>
+    
+    </html>
+    
